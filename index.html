@@ -1,0 +1,111 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>🎉Srećan Rođendan!</title>
+  <style>
+    body {
+      background: #D4D4D4;
+      font-family: 'Comic Sans MS', cursive;
+      text-align: center;
+      padding: 50px;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      color: #000000;
+    }
+
+    #popup {
+      display: none;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      border: 2px solid #000000;
+      width: 60%;
+      margin: 20px auto 0;
+      animation: fadein 1s ease-in-out;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background: #FF0000;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    @keyframes fadein {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>🎂 Srećan Rođendan Tečo! 🎂</h1> 
+  <button onclick="showPopup()">Click! 🎁</button> 
+
+  <div id="popup">
+    <p>🎉 Evo nama lepog dana, našem Teči Rođendana! 🎉</p> 
+    <p>Da uživaš i da se odmaraš, da dobiješ na Bitcoinu, pa da igramo Fortnite 😎✨💖</p> 
+    <p>Srećan Rođendan Tečo, sve najbolje ti želimo!!!</p> 
+  </div>
+
+  <!-- 🎵 Rođendanska melodija -->
+  <audio id="birthdaySong" src="audio/happy-birthday.mp3"></audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+
+  <script>
+    function showPopup() {
+      document.getElementById('popup').style.display = 'block';
+
+      // Konfete 🎉
+      confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
+      });
+
+      // Puštanje muzike 🎵
+      const song = document.getElementById('birthdaySong');
+      song.play();
+
+      // Baloni 🎈
+      for (let i = 0; i < 10; i++) {
+        setTimeout(createBalloon, i * 500);
+      }
+    }
+
+    // Funkcija za balone 🎈
+    function createBalloon() {
+      const balloon = document.createElement('div');
+      balloon.innerText = "🎈";
+      balloon.style.position = 'fixed';
+      balloon.style.bottom = '-50px';
+      balloon.style.left = Math.random() * 100 + 'vw';
+      balloon.style.fontSize = Math.random() * 20 + 30 + 'px';
+      balloon.style.animation = 'floatUp 5s linear forwards';
+      balloon.style.zIndex = '10';
+      document.body.appendChild(balloon);
+
+      setTimeout(() => {
+        balloon.remove();
+      }, 5000);
+    }
+
+    // Stalno stvaraj balone u pozadini
+    setInterval(createBalloon, 800);
+  </script>
+</body>
+</html>
